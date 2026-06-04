@@ -4,7 +4,7 @@ from sqlmodel import SQLModel, create_engine, Session
 from starlette.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from models.Producte import Producte, ProducteRequest, ProducteResponse
-from services.service_producte import crear_producte
+from services.service_producte import crear_producte_service, get_productes_service
 import os
 
 
@@ -33,14 +33,14 @@ def get_db():
 
 @app.post("/api/v1/productes", response_model=ProducteResponse)
 def create_product(producte: ProducteRequest, db: Session = Depends()):
-    return crear_producte(db,producte)
+    return crear_producte_service(db, producte)
 
 
 
 #ACTIVITAT 3 - READ: Posar el codi necessari aqui
-''' READ - Path: "/api/v1/productes" 
- Funcionalitat: Lectura de la taula productes i mostrar el client aquesta la informació demanada.
-'''
+@app.get("/api/v1/productes", response_model=ProducteResponse)
+def read_product(db: Session = Depends()):
+    return get_productes_service(db)
 
 
 # ACTIVITAT 4 - UPDATE: Posar el codi necessari aqui
