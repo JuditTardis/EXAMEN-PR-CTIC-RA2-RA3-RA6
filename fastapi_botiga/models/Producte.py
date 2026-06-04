@@ -8,8 +8,8 @@ from typing import Optional
 # Taula de productes
 class Producte(SQLModel, table=True):
     id : int = Field(defaul = None, primary_key=True)
-    nom : str 
-    descripcio : str = Field(sa_column=Column(String(100)))  #dada sensible
+    nom : str = Field(sa_column=Column(String(100)))
+    descripcio : str   #dada sensible
     preu : float = Field(sa_column=Column(Numeric(10,2)))
     stock : int = Field(default = 0)
     categoria : str = Field(sa_column=Column(String(50)))
