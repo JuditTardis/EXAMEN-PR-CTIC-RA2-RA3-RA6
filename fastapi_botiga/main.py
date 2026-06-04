@@ -4,7 +4,7 @@ from sqlmodel import SQLModel, create_engine, Session
 from starlette.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from models.Producte import Producte, ProducteRequest, ProducteResponse
-from services.service_producte import crear_producte_service, get_productes_service
+from services.service_producte import crear_producte_service, get_productes_service, update_producte_service
 import os
 
 
@@ -44,6 +44,9 @@ def read_product(db: Session = Depends()):
 
 
 # ACTIVITAT 4 - UPDATE: Posar el codi necessari aqui
+@app.put("/api/v1/productes/{producte_id}", response_model=ProducteResponse)
+def update_product(producte_id: int, dades: ProducteRequest, db: Session = Depends()):
+    return update_producte_service(db)
 '''UPDATE: Path: "/api/v1/productes/{producte_id}" 
 Funcionalitat: Modificació total o parcial (PUT/PATCH)
 Es demana una resposta indicant que s'ha fet la modificació correctament.
