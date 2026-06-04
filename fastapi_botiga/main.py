@@ -3,6 +3,8 @@ from fastapi.exceptions import HTTPException
 from sqlmodel import SQLModel, create_engine, Session
 from starlette.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
+from models.Producte import Producte, ProducteRequest, ProducteResponse
+from services.service_producte import crear_producte
 import os
 
 
@@ -29,11 +31,9 @@ def get_db():
 
 # ACTIVITAT 2 - CREATE: Modificar el codi per a que sigui funcional:
 
-@app.___("/api/v1/productes", response_model=)
-def create_product(producte: , db: Session = Depends()):
-    # Afegir funcionalitat
-
-    return 
+@app.post("/api/v1/productes", response_model=ProducteResponse)
+def create_product(producte: ProducteRequest, db: Session = Depends()):
+    return crear_producte(db,producte)
 
 
 
